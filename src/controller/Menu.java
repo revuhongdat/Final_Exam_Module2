@@ -1,9 +1,8 @@
 package controller;
 
 import service.ComparatorPrice;
+import service.ExceptionManager;
 import service.ProductManager;
-
-import javax.jws.soap.SOAPBinding;
 import java.util.Scanner;
 
 public class Menu {
@@ -22,7 +21,7 @@ public class Menu {
             System.out.println("7.Đọc từ file");
             System.out.println("8.Ghi vào file");
             System.out.println("9.Thoát");
-            int choice = Integer.parseInt(scanner.nextLine());
+            int choice = ExceptionManager.exceptionChoice();
             switch (choice) {
                 case 1:
                     productManager.displayProduct();
@@ -38,6 +37,7 @@ public class Menu {
                     break;
                 case 5:
                     productManager.sortProduct(comparatorPrice);
+                    productManager.displayProduct();
                     break;
                 case 6:
                     productManager.findMaxPrice(comparatorPrice);

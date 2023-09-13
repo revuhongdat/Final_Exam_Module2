@@ -32,7 +32,7 @@ public class ProductManager {
         int id;
         do {
             System.out.println("Nhập id của sản phẩm muốn sửa:");
-            id = Integer.parseInt(scanner.nextLine());
+            id = ExceptionManager.exceptionPositiveInteger();
             if (id < 1 || id > products.size()) {
                 check = false;
                 System.err.println("Không tìm thấy sản phẩm!");
@@ -44,7 +44,7 @@ public class ProductManager {
         System.out.println("Nhập giá mới của sản phẩm:");
         double newPrice = Double.parseDouble(scanner.nextLine());
         System.out.println("Nhập số lượng mới sản phẩm:");
-        int newQuantity = Integer.parseInt(scanner.nextLine());
+        int newQuantity = ExceptionManager.exceptionPositiveInteger();
         System.out.println("Nhập mô tả mới của sản phẩm:");
         String newDescription = scanner.nextLine();
         product.setName(newName);
@@ -66,14 +66,10 @@ public class ProductManager {
         int id = 0;
         do {
             System.out.println("Nhập id của sản phẩm muốn xoá:");
-            try{
-                id = Integer.parseInt(scanner.nextLine());
-                if (id < 1 || id > products.size()) {
-                    check = false;
-                    System.err.println("Không tìm thấy sản phẩm!");
-                }
-            } catch (Exception e) {
-                System.out.println("Nhập sai định dạng!");
+            id = ExceptionManager.exceptionPositiveInteger();
+            if (id < 1 || id > products.size()) {
+                check = false;
+                System.err.println("Không tìm thấy sản phẩm!");
             }
         } while (!check);
         Product product = findProductById(id);
@@ -86,7 +82,6 @@ public class ProductManager {
     }
     public void sortProduct(ComparatorPrice comparatorPrice) {
         products.sort(comparatorPrice);
-        displayProduct();
     }
     public void findMaxPrice(ComparatorPrice comparatorPrice) {
         if (products.isEmpty()) {
